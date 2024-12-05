@@ -1,3 +1,5 @@
+# Version: 1.0
+
 import pyaudio
 import wave
 import os
@@ -24,6 +26,5 @@ def record_voice(duration=15):
         wf.setsampwidth(audio.get_sample_size(format))
         wf.setframerate(rate)
         wf.writeframes(b''.join(frames))
-    global LAST_RECORD_FILE_LOCATION
 
 record_voice()
