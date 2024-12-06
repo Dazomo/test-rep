@@ -38,7 +38,7 @@ def record_voice(duration=10):
 
 def record_screen(duration=10):
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    out = cv2.VideoWriter(f"SCREENVID-{os.getlogin()}.avi", fourcc, 20.0, resolution)
+    out = cv2.VideoWriter(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi", fourcc, 20.0, resolution)
     end_time = pyautogui.time.time() + duration
     while pyautogui.time.time() < end_time:
         img = pyautogui.screenshot()
