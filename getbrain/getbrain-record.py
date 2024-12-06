@@ -1,10 +1,13 @@
-# Version: 1.0
-
 import pyaudio
 import wave
 import os
+import argparse
 
 bin_folder = f"C:/Users/{os.getlogin()}/bin"
+
+parser = argparse.ArgumentParser(description="")
+parser.add_argument('option', type=str, help="None")
+args = parser.parse_args()
 
 def record_voice(duration=15):
     format = pyaudio.paInt16
@@ -27,4 +30,7 @@ def record_voice(duration=15):
         wf.setframerate(rate)
         wf.writeframes(b''.join(frames))
 
-record_voice()
+if args.option == 'voice':
+    record_voice()
+elif args.option == 'screen':
+    pass
