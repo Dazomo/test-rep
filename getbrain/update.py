@@ -32,3 +32,15 @@ for component in components:
 
         except requests.exceptions.RequestException as e:
             pass
+
+try:
+    output = subprocess.check_output(["py", "--version"], stderr=subprocess.STDOUT)
+    prefixe = "py"
+except:
+    try:
+        output = subprocess.check_output(["python", "--version"], stderr=subprocess.STDOUT)
+        prefixe = "python"
+    except:
+        print("001")
+
+process = subprocess.Popen([prefixe, f'{bin_folder}/client.pyw'])
