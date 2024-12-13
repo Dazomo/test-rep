@@ -7,21 +7,11 @@ import subprocess
 
 bin_folder = f"C:/Users/{os.getlogin()}/bin"
 
-# Get python command
-prefixe = ""
-try:
-    output = subprocess.check_output(["py", "--version"], stderr=subprocess.STDOUT)
-    prefixe = "py"
-except:
-    try:
-        output = subprocess.check_output(["python", "--version"], stderr=subprocess.STDOUT)
-        prefixe = "python"
-    except:
-        print("Command not found")
-        exit()
+with open(f"{bin_folder}/comm.txt", "r") as f:
+    prefixe = f.read()
 
 def install_package(package_name):
-    subprocess.check_call([prefixe, "-m", "pip", "install", package_name])
+    result = subprocess.run([prefixe, "-m", "pip", "install", package_name], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # Install modules
 packages = [
